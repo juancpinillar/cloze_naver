@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "heroku-prebuild": "cd middle_server && npm install",
-    "start": "cd middle_server && npm start",
+    "start": "cd middle_server && npm start && npx prisma migrate dev --name init",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
