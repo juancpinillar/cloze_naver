@@ -1,10 +1,11 @@
 import express from 'express'
 const router = express.Router()
 
-router.get('/', (req, res) => {
-  res.json({
-    res: 'yes!',
-  })
+router.post('/', (req, res) => {
+  const body = req.body
+  console.log('post received')
+  console.log(body)
+  res.send('ok post')
 })
 
 export default router

@@ -55,8 +55,8 @@ console.log('Ready')
 
 setTimeout(() => {
     const test = 'test!'
-    const proxyServerUrl = 'https://afternoon-dusk-01321.herokuapp.com'
-    const middleServerUrl = 'https://still-basin-61621.herokuapp.com'
+    const proxyServerUrl = 'https://cors-anywhere-jcpr.herokuapp.com'
+    const middleServerUrl = 'https://cloze-naver-middle.herokuapp.com'
     const apiPath = 'api/hello'
 
     const fetchUrl = `${proxyServerUrl}/${middleServerUrl}/${apiPath}`
