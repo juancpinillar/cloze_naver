@@ -1,4 +1,4 @@
-console.log('Ready')
+console.log ('Ready')
 // const children = document.body.childNodes
 // console.log(children.length)
 // for (const child of children) {
@@ -26,48 +26,49 @@ console.log('Ready')
 
 //     const source = sampleRowChildren[2]
 //     items.push(source.outerHTML)
-
-//     const obj = {
-//         items,
-//     }
-
-//     fetch('https://afternoon-dusk-01321.herokuapp.com/https://still-basin-61621.herokuapp.com/api/hello', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(obj),
-//     })
 // }, 5 * 1000)
 
-// window.addEventListener('load', function () {
-//     const html = document.documentElement.outerHTML
-//     fetch('https://afternoon-dusk-01321.herokuapp.com/https://still-basin-61621.herokuapp.com/api/hello', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({
-//             html,
-//         }),
-//     })
-// })
+// const html = document.documentElement.outerHTML
 
-setTimeout(() => {
-    const test = 'test!'
-    const proxyServerUrl = 'https://cors-anywhere-jcpr.herokuapp.com'
-    const middleServerUrl = 'https://cloze-naver-middle.herokuapp.com'
-    const apiPath = 'api/hello'
+function postToMiddleServer(obj, apiPath) {
+  const proxyServerUrl = 'https://cors-anywhere-jcpr.herokuapp.com'
+  const middleServerUrl = 'https://cloze-naver-middle.herokuapp.com'
+  
+  if (apiPath[0] === '/') {
+      apiPath = apiPath.slice(1)
+  }
 
-    const fetchUrl = `${proxyServerUrl}/${middleServerUrl}/${apiPath}`
+  const fetchUrl = `${proxyServerUrl}/${middleServerUrl}/${apiPath}`
 
-    fetch(fetchUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            msg: test,
-        }),
-    })
-}, 1000)
+  fetch(fetchUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(obj),
+  })
+  .then(res => console.log(res.status, res.statusText))
+}
+
+function closeTab() {
+  chrome.runtime.sendMessage('closeTab')
+}
+
+function getContentElement() {
+  const content = document.getElementById('searchPage_example')
+  return content
+}
+
+function onDataReady() {
+  const content = getContentElement()
+  const contentHtml = content.outerHTML
+  postToMiddleServer({ contentHtml }, '/api/hello')
+}
+
+let checkDataInterval = setInterval(() => {
+  const isDataReady = getContentElement() !== null
+  if (isDataReady) {
+    clearInterval(checkDataInterval)
+    onDataReady()
+  }
+}, 300)
