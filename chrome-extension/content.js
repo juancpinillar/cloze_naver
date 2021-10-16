@@ -32,7 +32,7 @@ console.log ('Ready')
 
 function postToMiddleServer(obj, apiPath) {
   const proxyServerUrl = 'https://cors-anywhere-jcpr.herokuapp.com'
-  const middleServerUrl = 'https://cloze-naver-middle.herokuapp.com'
+  const middleServerUrl = 'http://186.84.21.166:5000'
   
   if (apiPath[0] === '/') {
       apiPath = apiPath.slice(1)
@@ -62,7 +62,7 @@ function getContentElement() {
 function onDataReady() {
   const content = getContentElement()
   const contentHtml = content.outerHTML
-  postToMiddleServer({ contentHtml }, '/api/hello')
+  // postToMiddleServer({ contentHtml }, '/api/hello')
 }
 
 let checkDataInterval = setInterval(() => {
@@ -72,3 +72,5 @@ let checkDataInterval = setInterval(() => {
     onDataReady()
   }
 }, 300)
+
+postToMiddleServer({ msg: '15 '}, '/api/hello')
