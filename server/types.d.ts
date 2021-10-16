@@ -5,3 +5,7 @@ export interface HtmlUpdate {
 }
 
 export interface HtmlUpdateDb extends HtmlUpdate, Document {}
+
+export interface RestError {
+  err: string
+}
