@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "heroku-postbuild": "cd middle_server && npm install",
-    "start": "cd middle_server && npm install && npm start",
+    "heroku-postbuild": "cd middle_server && npm install && cd ../server && npm install",
+    "start": "cd middle_server && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
