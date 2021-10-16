@@ -4,7 +4,7 @@ import { model, Model } from 'mongoose'
 
 const HtmlUpdateModel: Model<HtmlUpdateDb> = model('HtmlUpdate', HtmlUpdateSchema)
 
-export async function setHtmlContent(content: string) {
+export async function setHtmlContent(content: string): Promise<void> {
   const htmlUpdates = await HtmlUpdateModel.find()
   if (htmlUpdates.length) {
     const firstHtmlUpdate = htmlUpdates[0]

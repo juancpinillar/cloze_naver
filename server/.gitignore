@@ -1,3 +1,20 @@
-node_modules
-# Keep environment variables out of version control
-.env
+# For both Express and React
+node_modules/
+
+# React build
+client/build/
+
+# VS code
+.vscode
+
+# Logs
+npm-debug.log*
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+files/
