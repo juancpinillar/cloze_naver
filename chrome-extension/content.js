@@ -30,9 +30,9 @@ console.log ('Ready')
 
 // const html = document.documentElement.outerHTML
 
-function postToMiddleServer(obj, apiPath) {
+async function postToMiddleServer(obj, apiPath) {
   const proxyServerUrl = 'https://cors-anywhere-jcpr.herokuapp.com'
-  const middleServerUrl = 'http://186.84.21.166:5000'
+  const middleServerUrl = 'https://cloze-naver-middle.herokuapp.com'
   
   if (apiPath[0] === '/') {
       apiPath = apiPath.slice(1)
@@ -40,14 +40,15 @@ function postToMiddleServer(obj, apiPath) {
 
   const fetchUrl = `${proxyServerUrl}/${middleServerUrl}/${apiPath}`
 
-  fetch(fetchUrl, {
+  await fetch(fetchUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(obj),
   })
-  .then(res => console.log(res.status, res.statusText))
+
+  closeTab()
 }
 
 function closeTab() {
@@ -60,9 +61,12 @@ function getContentElement() {
 }
 
 function onDataReady() {
-  const content = getContentElement()
-  const contentHtml = content.outerHTML
-  // postToMiddleServer({ contentHtml }, '/api/hello')
+  const contentElement = getContentElement()
+  const contentHtml = contentElement.outerHTML
+  const htmlUpdate = {
+    content: contentHtml
+  }
+  postToMiddleServer(htmlUpdate, '/api/hello')
 }
 
 let checkDataInterval = setInterval(() => {
@@ -72,5 +76,3 @@ let checkDataInterval = setInterval(() => {
     onDataReady()
   }
 }, 300)
-
-postToMiddleServer({ msg: '15 '}, '/api/hello')

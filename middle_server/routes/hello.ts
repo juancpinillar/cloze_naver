@@ -1,19 +1,14 @@
 import express from 'express'
-import mongoose from 'mongoose'
-import { createSample, getFirst } from '../db/htmlUpdates'
+import { HtmlUpdate } from '../../server/types'
+import { setHtmlContent } from '../db/htmlUpdates'
 const router = express.Router()
 
-router.post('/', (req, res) => {
-  const body = req.body
-  console.log('post received')
-  console.log(body)
-  res.send('ok post')
+router.post('/', async (req, res) => {
+  const htmlUpdate: HtmlUpdate = req.body
+  console.log('update received')
+  await setHtmlContent(htmlUpdate.content)
+  res.send('update completed')
 })
 
-router.get('/', (req, res) => {
-  console.log('get received')
-  getFirst()
-  res.send('ok get')
-})
 
 export default router

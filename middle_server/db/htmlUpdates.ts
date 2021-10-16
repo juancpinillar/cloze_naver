@@ -1,24 +1,19 @@
-import { getModelForClass, prop } from "@typegoose/typegoose"
+import { HtmlUpdateSchema } from '../../server/db/htmlUpdates'
+import { HtmlUpdateDb } from '../../server/types'
+import { model, Model } from 'mongoose'
 
-class HtmlUpdate {
-  @prop({ required: true })
-  public content!: string
-}
+const HtmlUpdateModel: Model<HtmlUpdateDb> = model('HtmlUpdate', HtmlUpdateSchema)
 
-const HtmlUpdateModel = getModelForClass(HtmlUpdate)
-
-export async function createSample() {
-  const sample = await HtmlUpdateModel.create({ content: 'hello' })
-  await sample.save()
-  console.log('created')
-}
-
-export async function getFirst() {
+export async function setHtmlContent(content: string) {
   const htmlUpdates = await HtmlUpdateModel.find()
   if (htmlUpdates.length) {
     const firstHtmlUpdate = htmlUpdates[0]
-    console.log(firstHtmlUpdate.content)
+    firstHtmlUpdate.content = content
+    await firstHtmlUpdate.save()
+    console.log('Updated')
   } else {
-    console.log('no html updates')
+    const newHtmlUpdate = new HtmlUpdateModel({ content })
+    await newHtmlUpdate.save()
+    console.log('Created')
   }
 }
