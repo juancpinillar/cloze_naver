@@ -3,3 +3,9 @@ export interface Object {
 }
 
 export type twString = string
+
+export interface NaverExample {
+  targetSent: string
+  sourceSent: string
+  origin: string
+}

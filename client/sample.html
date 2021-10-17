@@ -1,0 +1,482 @@
+<div class="section section_example has-setting" id="searchPage_example">
+    <h3 class="section_title myScrollNavQuick" scrolltitle="Examples" nclickcode="nvi.example">
+        Examples
+        <span class="count"> 2,729</span>
+        <div class="btn_area">
+                <a href="#/search?range=vlive&amp;query=%ED%95%98%EB%8A%98" class="link" onclick="clickcr(this, 'exm.onlyvlive','','',event);">VLIVE Fansubs</a>
+                    <div class="setting_area _setting_area" style="display:none">
+                        <button type="button" class="btn_setting _btn_setting" aria-label="발음듣기 설정 열기">TTS Settings</button>
+                        <div class="tooltip _tooltip" style="display: none;">
+                            <div class="tooltip_inner">
+                                <p class="title">Example TTS Settings</p>
+                                <p class="desc">
+                                    Click here to change the voice and speed of TTS!
+                                </p>
+                                <button class="btn_close _btn_close" aria-label="닫기"></button>
+                            </div>
+                        </div>
+                    
+                        <div class="option_wrap">
+                            <div class="header_setting">
+                                <div class="title">TTS Settings</div>
+                                <button class="btn_close _voice_setting_close_btn" type="button" aria-label="딛기"></button>
+                            </div>
+                            <div class="listen_setting_wrap">
+                                <div class="desc">
+                                    With Naver's voice synthesis technology, <br>Naver English Dictionary provides natural-sounding and high-quality TTS voices.
+                                </div>
+                                <div class="option_area">
+                                    <div class="cate">Voice</div>
+                                    <div class="item_wrap">
+                                        <div class="option_item">
+                                            <input type="radio" class="input_radio blind _input_radio" id="voice1" onclick="clickcr(this,'set.ttsdanna','','1',event);">
+                                            <label for="voice1" class="vocie_item is-active _vocie_item" data-speaker="danna"><strong class="name">Anna</strong> American English</label>
+                                        </div>
+                                        <div class="option_item">
+                                            <input type="radio" class="input_radio blind _input_radio" id="voice2" onclick="clickcr(this,'set.ttsdjoey','','1',event);">
+                                            <label for="voice2" class="vocie_item _vocie_item" data-speaker="djoey"><strong class="name">Joey</strong> American English · a child</label>
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                                <div class="option_area">
+                                    <div class="cate">Speed</div>
+                                    <div class="item_wrap">
+                                        <div class="option_item">
+                                            <span class="type">1st play</span>
+                                            <div class="slider-container">
+                                                <input type="range" id="slider" class="slider blind value2" min="1" max="5" style="display: none;">
+                                            </div>
+                                            <div class="set_speed">
+                                                <span class="speed">0.6X</span>
+                                                <span class="speed">0.8X</span>
+                                                <span class="speed">0.9X</span>
+                                                <span class="speed">1X</span>
+                                                <span class="speed">1.2X</span>
+                                            </div>
+                                        </div>
+                                        <div class="option_item">
+                                            <span class="type">2nd play</span>
+                                            <div class="slider-container">
+                                                <input type="range" id="slider2" class="slider blind value3" min="1" max="5" style="display: none;">
+                                            </div>
+                                            <div class="set_speed">
+                                                <span class="speed">0.6X</span>
+                                                <span class="speed">0.8X</span>
+                                                <span class="speed">0.9X</span>
+                                                <span class="speed">1X</span>
+                                                <span class="speed">1.2X</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn_save _voice_setting_save_btn" type="button">Save</button>
+                        </div>
+                    </div>
+        </div>
+    
+    </h3>
+        <!-- 为方便共用主题搜区域，将其独立出来一个模版 -->
+        <!-- 主题例文搜索区域  start -->
+            <!-- PC主题例文搜索区域  start -->
+            <div class="component_filter">
+                <div class="radio_group">
+                    <!-- 선택시 is-active 클래스 추가 -->
+                    <span class="item">
+                        <input type="radio" name="level" id="level1" value="all" class="inp_check _exampleSubject">
+                        <label for="level1" class="inp_label active is-active">
+                            <span class="title">ALL</span>
+                        </label>
+                    </span>
+                    <span class="item">
+                        <input type="radio" name="level" id="level2" value="exist:1" class="inp_check _exampleSubject">
+                        <label for="level2" class="inp_label">
+                            <span class="title">Level 1</span>
+                        </label>
+                    </span>
+                    <span class="item">
+                        <input type="radio" name="level" id="level3" value="exist:2" class="inp_check _exampleSubject">
+                        <label for="level3" class="inp_label">Level 2</label>
+                    </span>
+                    <span class="item">
+                        <input type="radio" name="level" id="level4" value="exist:3" class="inp_check _exampleSubject">
+                        <label for="level4" class="inp_label">
+                            <span class="title">Level 3</span>
+                        </label>
+                    </span>
+                    <span class="btn_option">
+                        <!-- 선택시 is-active 클래스 추가 -->
+                        <label for="outer" class="inp_label_check active is-active">
+                            Have translations
+                            <input type="checkbox" name="outer" id="outer" value="exist:1" class="inp_check _exampleSubjectHasTrans">
+                        </label>
+                    </span>
+                </div>
+            </div>
+            <!-- PC主题例文搜索区域  end -->
+    <!-- 例文显示区域，主题搜索时要重新渲染数据，所以将模板提取出来到searchExampleContent.handlebars -->
+    <div class="component_example has-saving-function">
+            <div class="row">
+                 
+                
+                <div class="origin is-audible" lang="en" exampleid="a8574c8d685d4d13a9a3093dcae440c6">
+                    <span class="text" lang="en">
+                        The sky was clear and studded with stars. 
+                    </span>
+                            <span class="unit_listen">
+                                <button class="btn_listen tts ico_pron _double_play" tts="nvoice" title="TTS" vcode="132511" encode="The+sky+was+clear+and+studded+with+stars." audioid="tts" nclk="exm.tts">발음듣기</button>
+                                    <button type="button" class="btn_repeat _repeat_play" tts="nvoice" aria-label="TTS" vcode="132511" encode="The+sky+was+clear+and+studded+with+stars." audioid="tts">Replay</button>
+                            </span>
+                        <button type="button" exampleid="a8574c8d685d4d13a9a3093dcae440c6" dicttype="A2B" class="unit_add_wordbook _btn_add_wordbook_example" aria-label="Add to Wordbook" onclick="clickcr(this, 'exm.add','','',event);"></button>
+                </div>
+                    <div class="translate" lang="ko">
+                        <p class="text" lang="ko">
+                            <strong class="highlight">하늘</strong>은 맑고 별이 총총했다.
+                            
+                        </p>
+                    </div>
+                <!-- source -->
+                        <a href="http://www.oxfordlearnersdictionaries.com/" onclick="clickcr(this, 'exm.sourcelink','','',event);" class="source" target="_blank">Oxford Advanced Learner's English-Korean Dictionary</a>
+                     
+            </div>
+            <div class="row">
+                 
+                
+                <div class="origin is-audible" lang="en" exampleid="fd172c3f311847da9206d92972f77e2f">
+                    <span class="text" lang="en">
+                        The sky began to lighten in the east. 
+                    </span>
+                            <span class="unit_listen">
+                                <button class="btn_listen tts ico_pron _double_play" tts="nvoice" title="TTS" vcode="737356" encode="The+sky+began+to+lighten+in+the+east." audioid="tts" nclk="exm.tts">발음듣기</button>
+                                    <button type="button" class="btn_repeat _repeat_play" tts="nvoice" aria-label="TTS" vcode="737356" encode="The+sky+began+to+lighten+in+the+east." audioid="tts">Replay</button>
+                            </span>
+                        <button type="button" exampleid="fd172c3f311847da9206d92972f77e2f" dicttype="A2B" class="unit_add_wordbook _btn_add_wordbook_example" aria-label="Add to Wordbook" onclick="clickcr(this, 'exm.add','','',event);"></button>
+                </div>
+                    <div class="translate" lang="ko">
+                        <p class="text" lang="ko">
+                            동녘 <strong class="highlight">하늘</strong>이 밝아 오기 시작했다.
+                            
+                        </p>
+                    </div>
+                <!-- source -->
+                        <a href="http://www.oxfordlearnersdictionaries.com/" onclick="clickcr(this, 'exm.sourcelink','','',event);" class="source" target="_blank">Oxford Advanced Learner's English-Korean Dictionary</a>
+                     
+            </div>
+            <div class="row">
+                 
+                
+                <div class="origin is-audible" lang="en" exampleid="bfc03ef586f047dca1fd12e7a1e52fd8">
+                    <span class="text" lang="en">
+                        The rocket soared (up) into the air. 
+                    </span>
+                            <span class="unit_listen">
+                                <button class="btn_listen tts ico_pron _double_play" tts="nvoice" title="TTS" vcode="807926" encode="The+rocket+soared++into+the+air." audioid="tts" nclk="exm.tts">발음듣기</button>
+                                    <button type="button" class="btn_repeat _repeat_play" tts="nvoice" aria-label="TTS" vcode="807926" encode="The+rocket+soared++into+the+air." audioid="tts">Replay</button>
+                            </span>
+                        <button type="button" exampleid="bfc03ef586f047dca1fd12e7a1e52fd8" dicttype="A2B" class="unit_add_wordbook _btn_add_wordbook_example" aria-label="Add to Wordbook" onclick="clickcr(this, 'exm.add','','',event);"></button>
+                </div>
+                    <div class="translate" lang="ko">
+                        <p class="text" lang="ko">
+                            로켓이 <strong class="highlight">하늘</strong> 높이 솟구쳐 올라갔다.
+                            
+                        </p>
+                    </div>
+                <!-- source -->
+                        <a href="http://www.oxfordlearnersdictionaries.com/" onclick="clickcr(this, 'exm.sourcelink','','',event);" class="source" target="_blank">Oxford Advanced Learner's English-Korean Dictionary</a>
+                     
+            </div>
+            <div class="row">
+                 
+                
+                <div class="origin is-audible" lang="en" exampleid="5e73dc040505435897129c82a02855e4">
+                    <span class="text" lang="en">
+                        a shimmer of moonlight in the dark sky 
+                    </span>
+                            <span class="unit_listen">
+                                <button class="btn_listen tts ico_pron _double_play" tts="nvoice" title="TTS" vcode="675115" encode="a+shimmer+of+moonlight+in+the+dark+sky" audioid="tts" nclk="exm.tts">발음듣기</button>
+                                    <button type="button" class="btn_repeat _repeat_play" tts="nvoice" aria-label="TTS" vcode="675115" encode="a+shimmer+of+moonlight+in+the+dark+sky" audioid="tts">Replay</button>
+                            </span>
+                        <button type="button" exampleid="5e73dc040505435897129c82a02855e4" dicttype="A2B" class="unit_add_wordbook _btn_add_wordbook_example" aria-label="Add to Wordbook" onclick="clickcr(this, 'exm.add','','',event);"></button>
+                </div>
+                    <div class="translate" lang="ko">
+                        <p class="text" lang="ko">
+                            어두운 <strong class="highlight">하늘</strong>의 희미한 달빛
+                            
+                        </p>
+                    </div>
+                <!-- source -->
+                        <a href="http://www.oxfordlearnersdictionaries.com/" onclick="clickcr(this, 'exm.sourcelink','','',event);" class="source" target="_blank">Oxford Advanced Learner's English-Korean Dictionary</a>
+                     
+            </div>
+            <div class="row">
+                 
+                
+                <div class="origin is-audible" lang="en" exampleid="ee03402e050d48f992aba511e647ff3f">
+                    <span class="text" lang="en">
+                        Birds wheeled above us in the sky. 
+                    </span>
+                            <span class="unit_listen">
+                                <button class="btn_listen tts ico_pron _double_play" tts="nvoice" title="TTS" vcode="764222" encode="Birds+wheeled+above+us+in+the+sky." audioid="tts" nclk="exm.tts">발음듣기</button>
+                                    <button type="button" class="btn_repeat _repeat_play" tts="nvoice" aria-label="TTS" vcode="764222" encode="Birds+wheeled+above+us+in+the+sky." audioid="tts">Replay</button>
+                            </span>
+                        <button type="button" exampleid="ee03402e050d48f992aba511e647ff3f" dicttype="A2B" class="unit_add_wordbook _btn_add_wordbook_example" aria-label="Add to Wordbook" onclick="clickcr(this, 'exm.add','','',event);"></button>
+                </div>
+                    <div class="translate" lang="ko">
+                        <p class="text" lang="ko">
+                            새들이 우리 위에 있는 <strong class="highlight">하늘</strong>을 선회했다.
+                            
+                        </p>
+                    </div>
+                <!-- source -->
+                        <a href="http://www.oxfordlearnersdictionaries.com/" onclick="clickcr(this, 'exm.sourcelink','','',event);" class="source" target="_blank">Oxford Advanced Learner's English-Korean Dictionary</a>
+                     
+            </div>
+            <div class="row">
+                 
+                
+                <div class="origin is-audible" lang="en" exampleid="9034621463ac41fc84ea035c42254803">
+                    <span class="text" lang="en">
+                        The sky was full of brightly coloured fireworks. 
+                    </span>
+                            <span class="unit_listen">
+                                <button class="btn_listen tts ico_pron _double_play" tts="nvoice" title="TTS" vcode="900949" encode="The+sky+was+full+of+brightly+coloured+fireworks." audioid="tts" nclk="exm.tts">발음듣기</button>
+                                    <button type="button" class="btn_repeat _repeat_play" tts="nvoice" aria-label="TTS" vcode="900949" encode="The+sky+was+full+of+brightly+coloured+fireworks." audioid="tts">Replay</button>
+                            </span>
+                        <button type="button" exampleid="9034621463ac41fc84ea035c42254803" dicttype="A2B" class="unit_add_wordbook _btn_add_wordbook_example" aria-label="Add to Wordbook" onclick="clickcr(this, 'exm.add','','',event);"></button>
+                </div>
+                    <div class="translate" lang="ko">
+                        <p class="text" lang="ko">
+                            <strong class="highlight">하늘</strong>에는 밝은 불꽃들이 그득했다.
+                            
+                        </p>
+                    </div>
+                <!-- source -->
+                        <a href="http://www.oxfordlearnersdictionaries.com/" onclick="clickcr(this, 'exm.sourcelink','','',event);" class="source" target="_blank">Oxford Advanced Learner's English-Korean Dictionary</a>
+                     
+            </div>
+            <div class="row">
+                 
+                
+                <div class="origin is-audible" lang="en" exampleid="9cbef80bbfe1475cb528be88554ea298">
+                    <span class="text" lang="en">
+                        The jumbo jet was blasted out of the sky. 
+                    </span>
+                            <span class="unit_listen">
+                                <button class="btn_listen tts ico_pron _double_play" tts="nvoice" title="TTS" vcode="217852" encode="The+jumbo+jet+was+blasted+out+of+the+sky." audioid="tts" nclk="exm.tts">발음듣기</button>
+                                    <button type="button" class="btn_repeat _repeat_play" tts="nvoice" aria-label="TTS" vcode="217852" encode="The+jumbo+jet+was+blasted+out+of+the+sky." audioid="tts">Replay</button>
+                            </span>
+                        <button type="button" exampleid="9cbef80bbfe1475cb528be88554ea298" dicttype="A2B" class="unit_add_wordbook _btn_add_wordbook_example" aria-label="Add to Wordbook" onclick="clickcr(this, 'exm.add','','',event);"></button>
+                </div>
+                    <div class="translate" lang="ko">
+                        <p class="text" lang="ko">
+                            그 점보제트기는 <strong class="highlight">하늘</strong>에서 폭파되었다.
+                            
+                        </p>
+                    </div>
+                <!-- source -->
+                        <a href="http://www.oxfordlearnersdictionaries.com/" onclick="clickcr(this, 'exm.sourcelink','','',event);" class="source" target="_blank">Oxford Advanced Learner's English-Korean Dictionary</a>
+                     
+            </div>
+            <div class="row">
+                 
+                
+                <div class="origin is-audible" lang="en" exampleid="5910f493754a4c4b898dd3c0aacb8d8e">
+                    <span class="text" lang="en">
+                        The sun shone brightly in a cloudless sky. 
+                    </span>
+                            <span class="unit_listen">
+                                <button class="btn_listen tts ico_pron _double_play" tts="nvoice" title="TTS" vcode="628322" encode="The+sun+shone+brightly+in+a+cloudless+sky." audioid="tts" nclk="exm.tts">발음듣기</button>
+                                    <button type="button" class="btn_repeat _repeat_play" tts="nvoice" aria-label="TTS" vcode="628322" encode="The+sun+shone+brightly+in+a+cloudless+sky." audioid="tts">Replay</button>
+                            </span>
+                        <button type="button" exampleid="5910f493754a4c4b898dd3c0aacb8d8e" dicttype="A2B" class="unit_add_wordbook _btn_add_wordbook_example" aria-label="Add to Wordbook" onclick="clickcr(this, 'exm.add','','',event);"></button>
+                </div>
+                    <div class="translate" lang="ko">
+                        <p class="text" lang="ko">
+                            구름 한 점 없는 <strong class="highlight">하늘</strong>에서 해가 밝게 빛났다.
+                            
+                        </p>
+                    </div>
+                <!-- source -->
+                        <a href="http://www.oxfordlearnersdictionaries.com/" onclick="clickcr(this, 'exm.sourcelink','','',event);" class="source" target="_blank">Oxford Advanced Learner's English-Korean Dictionary</a>
+                     
+            </div>
+            <div class="row">
+                 
+                
+                <div class="origin is-audible" lang="en" exampleid="cb7bb5f6be544eb2adec00d1cde4fccb">
+                    <span class="text" lang="en">
+                        In the distance, the sky was beginning to brighten. 
+                    </span>
+                            <span class="unit_listen">
+                                <button class="btn_listen tts ico_pron _double_play" tts="nvoice" title="TTS" vcode="800251" encode="In+the+distance%2C+the+sky+was+beginning+to+brighten." audioid="tts" nclk="exm.tts">발음듣기</button>
+                                    <button type="button" class="btn_repeat _repeat_play" tts="nvoice" aria-label="TTS" vcode="800251" encode="In+the+distance%2C+the+sky+was+beginning+to+brighten." audioid="tts">Replay</button>
+                            </span>
+                        <button type="button" exampleid="cb7bb5f6be544eb2adec00d1cde4fccb" dicttype="A2B" class="unit_add_wordbook _btn_add_wordbook_example" aria-label="Add to Wordbook" onclick="clickcr(this, 'exm.add','','',event);"></button>
+                </div>
+                    <div class="translate" lang="ko">
+                        <p class="text" lang="ko">
+                            멀리 <strong class="highlight">하늘</strong>이 밝아 오기 시작하고 있었다.
+                            
+                        </p>
+                    </div>
+                <!-- source -->
+                        <a href="http://www.oxfordlearnersdictionaries.com/" onclick="clickcr(this, 'exm.sourcelink','','',event);" class="source" target="_blank">Oxford Advanced Learner's English-Korean Dictionary</a>
+                     
+            </div>
+            <div class="row">
+                 
+                
+                <div class="origin is-audible" lang="en" exampleid="674433b34e1b4e4ba9e7f089b6e8cf58">
+                    <span class="text" lang="en">
+                        They beheld a bright star shining in the sky. 
+                    </span>
+                            <span class="unit_listen">
+                                <button class="btn_listen tts ico_pron _double_play" tts="nvoice" title="TTS" vcode="347964" encode="They+beheld+a+bright+star+shining+in+the+sky." audioid="tts" nclk="exm.tts">발음듣기</button>
+                                    <button type="button" class="btn_repeat _repeat_play" tts="nvoice" aria-label="TTS" vcode="347964" encode="They+beheld+a+bright+star+shining+in+the+sky." audioid="tts">Replay</button>
+                            </span>
+                        <button type="button" exampleid="674433b34e1b4e4ba9e7f089b6e8cf58" dicttype="A2B" class="unit_add_wordbook _btn_add_wordbook_example" aria-label="Add to Wordbook" onclick="clickcr(this, 'exm.add','','',event);"></button>
+                </div>
+                    <div class="translate" lang="ko">
+                        <p class="text" lang="ko">
+                            그들은 <strong class="highlight">하늘</strong>에 밝게 빛나는 별 하나를 보았다.
+                            
+                        </p>
+                    </div>
+                <!-- source -->
+                        <a href="http://www.oxfordlearnersdictionaries.com/" onclick="clickcr(this, 'exm.sourcelink','','',event);" class="source" target="_blank">Oxford Advanced Learner's English-Korean Dictionary</a>
+                     
+            </div>
+            <div class="row">
+                 
+                
+                <div class="origin is-audible" lang="en" exampleid="4d4101f68490493eb2486126fe171c18">
+                    <span class="text" lang="en">
+                        The sky began to darken as the storm approached. 
+                    </span>
+                            <span class="unit_listen">
+                                <button class="btn_listen tts ico_pron _double_play" tts="nvoice" title="TTS" vcode="419898" encode="The+sky+began+to+darken+as+the+storm+approached." audioid="tts" nclk="exm.tts">발음듣기</button>
+                                    <button type="button" class="btn_repeat _repeat_play" tts="nvoice" aria-label="TTS" vcode="419898" encode="The+sky+began+to+darken+as+the+storm+approached." audioid="tts">Replay</button>
+                            </span>
+                        <button type="button" exampleid="4d4101f68490493eb2486126fe171c18" dicttype="A2B" class="unit_add_wordbook _btn_add_wordbook_example" aria-label="Add to Wordbook" onclick="clickcr(this, 'exm.add','','',event);"></button>
+                </div>
+                    <div class="translate" lang="ko">
+                        <p class="text" lang="ko">
+                            폭풍이 다가오자 <strong class="highlight">하늘</strong>이 어두워지기 시작했다.
+                            
+                        </p>
+                    </div>
+                <!-- source -->
+                        <a href="http://www.oxfordlearnersdictionaries.com/" onclick="clickcr(this, 'exm.sourcelink','','',event);" class="source" target="_blank">Oxford Advanced Learner's English-Korean Dictionary</a>
+                     
+            </div>
+            <div class="row">
+                 
+                
+                <div class="origin is-audible" lang="en" exampleid="0256403a57b04999892c8b787817ef90">
+                    <span class="text" lang="en">
+                        The great beeches towered up towards the sky. 
+                    </span>
+                            <span class="unit_listen">
+                                <button class="btn_listen tts ico_pron _double_play" tts="nvoice" title="TTS" vcode="011510" encode="The+great+beeches+towered+up+towards+the+sky." audioid="tts" nclk="exm.tts">발음듣기</button>
+                                    <button type="button" class="btn_repeat _repeat_play" tts="nvoice" aria-label="TTS" vcode="011510" encode="The+great+beeches+towered+up+towards+the+sky." audioid="tts">Replay</button>
+                            </span>
+                        <button type="button" exampleid="0256403a57b04999892c8b787817ef90" dicttype="A2B" class="unit_add_wordbook _btn_add_wordbook_example" aria-label="Add to Wordbook" onclick="clickcr(this, 'exm.add','','',event);"></button>
+                </div>
+                    <div class="translate" lang="ko">
+                        <p class="text" lang="ko">
+                            거대한 너도밤나무들이 <strong class="highlight">하늘</strong>을 향해 높이 서 있었다.
+                            
+                        </p>
+                    </div>
+                <!-- source -->
+                        <a href="http://www.oxfordlearnersdictionaries.com/" onclick="clickcr(this, 'exm.sourcelink','','',event);" class="source" target="_blank">Oxford Advanced Learner's English-Korean Dictionary</a>
+                     
+            </div>
+            <div class="row">
+                 
+                
+                <div class="origin is-audible" lang="en" exampleid="aff65a1fd6f440f29760e0c53b9a2a5e">
+                    <span class="text" lang="en">
+                        The lighthouse stood out starkly against the dark sky. 
+                    </span>
+                            <span class="unit_listen">
+                                <button class="btn_listen tts ico_pron _double_play" tts="nvoice" title="TTS" vcode="903797" encode="The+lighthouse+stood+out+starkly+against+the+dark+sky." audioid="tts" nclk="exm.tts">발음듣기</button>
+                                    <button type="button" class="btn_repeat _repeat_play" tts="nvoice" aria-label="TTS" vcode="903797" encode="The+lighthouse+stood+out+starkly+against+the+dark+sky." audioid="tts">Replay</button>
+                            </span>
+                        <button type="button" exampleid="aff65a1fd6f440f29760e0c53b9a2a5e" dicttype="A2B" class="unit_add_wordbook _btn_add_wordbook_example" aria-label="Add to Wordbook" onclick="clickcr(this, 'exm.add','','',event);"></button>
+                </div>
+                    <div class="translate" lang="ko">
+                        <p class="text" lang="ko">
+                            등대가 어두운 <strong class="highlight">하늘</strong>을 배경으로 황량하게 우뚝 서 있었다.
+                            
+                        </p>
+                    </div>
+                <!-- source -->
+                        <a href="http://www.oxfordlearnersdictionaries.com/" onclick="clickcr(this, 'exm.sourcelink','','',event);" class="source" target="_blank">Oxford Advanced Learner's English-Korean Dictionary</a>
+                     
+            </div>
+            <div class="row">
+                 
+                
+                <div class="origin is-audible" lang="en" exampleid="45703552aeb44e269175816516f84c79">
+                    <span class="text" lang="en">
+                        What’s that in the sky? 
+                    </span>
+                            <span class="unit_listen">
+                                <button class="btn_listen tts ico_pron _double_play" tts="nvoice" title="TTS" vcode="964373" encode="What%27s+that+in+the+sky%3F" audioid="tts" nclk="exm.tts">발음듣기</button>
+                                    <button type="button" class="btn_repeat _repeat_play" tts="nvoice" aria-label="TTS" vcode="964373" encode="What%27s+that+in+the+sky%3F" audioid="tts">Replay</button>
+                            </span>
+                        <button type="button" exampleid="45703552aeb44e269175816516f84c79" dicttype="A2B" class="unit_add_wordbook _btn_add_wordbook_example" aria-label="Add to Wordbook" onclick="clickcr(this, 'exm.add','','',event);"></button>
+                </div>
+                    <div class="translate" lang="ko">
+                        <p class="text" lang="ko">
+                            <strong class="highlight">하늘</strong>에 있는 저게 뭐지?
+                            
+                        </p>
+                    </div>
+                <!-- source -->
+                        <a href="http://www.oxfordlearnersdictionaries.com/" onclick="clickcr(this, 'exm.sourcelink','','',event);" class="source" target="_blank">Oxford Advanced Learner's English-Korean Dictionary</a>
+                     
+            </div>
+            <div class="row">
+                 
+                
+                <div class="origin is-audible" lang="en" exampleid="b2bac4e0a96344eaab039bc3e0813be3">
+                    <span class="text" lang="en">
+                        The sky was reddening. 
+                    </span>
+                            <span class="unit_listen">
+                                <button class="btn_listen tts ico_pron _double_play" tts="nvoice" title="TTS" vcode="189025" encode="The+sky+was+reddening." audioid="tts" nclk="exm.tts">발음듣기</button>
+                                    <button type="button" class="btn_repeat _repeat_play" tts="nvoice" aria-label="TTS" vcode="189025" encode="The+sky+was+reddening." audioid="tts">Replay</button>
+                            </span>
+                        <button type="button" exampleid="b2bac4e0a96344eaab039bc3e0813be3" dicttype="A2B" class="unit_add_wordbook _btn_add_wordbook_example" aria-label="Add to Wordbook" onclick="clickcr(this, 'exm.add','','',event);"></button>
+                </div>
+                    <div class="translate" lang="ko">
+                        <p class="text" lang="ko">
+                            <strong class="highlight">하늘</strong>이 붉게 물들고 있었다.
+                            
+                        </p>
+                    </div>
+                <!-- source -->
+                        <a href="http://www.oxfordlearnersdictionaries.com/" onclick="clickcr(this, 'exm.sourcelink','','',event);" class="source" target="_blank">Oxford Advanced Learner's English-Korean Dictionary</a>
+                     
+            </div>
+        <div id="dataBean" style="display:none;"></div>
+    </div>
+        <a class="section_more" id="searchPage_example_more" onclick="clickcr(this, 'exm.more','','',event);" href="#/search?range=example&amp;shouldSearchVlive=false&amp;query=%ED%95%98%EB%8A%98&amp;haveTrans=exist:1" style="display: none;">View more examples</a>
+            <div class="paginate" id="searchPage_example_paginate" style="">
+                            <strong>1</strong>
+                                    <a href="#/search?range=example&amp;page=2&amp;query=%ED%95%98%EB%8A%98&amp;shouldSearchVlive=false" onclick="clickcr(this,'pgn.next','2','',event);">2</a>
+                                    <a href="#/search?range=example&amp;page=3&amp;query=%ED%95%98%EB%8A%98&amp;shouldSearchVlive=false" onclick="clickcr(this,'pgn.next','2','',event);">3</a>
+                                    <a href="#/search?range=example&amp;page=4&amp;query=%ED%95%98%EB%8A%98&amp;shouldSearchVlive=false" onclick="clickcr(this,'pgn.next','2','',event);">4</a>
+                                    <a href="#/search?range=example&amp;page=5&amp;query=%ED%95%98%EB%8A%98&amp;shouldSearchVlive=false" onclick="clickcr(this,'pgn.next','2','',event);">5</a>
+                                    <a href="#/search?range=example&amp;page=6&amp;query=%ED%95%98%EB%8A%98&amp;shouldSearchVlive=false" onclick="clickcr(this,'pgn.next','2','',event);">6</a>
+                                    <a href="#/search?range=example&amp;page=7&amp;query=%ED%95%98%EB%8A%98&amp;shouldSearchVlive=false" onclick="clickcr(this,'pgn.next','2','',event);">7</a>
+                                    <a href="#/search?range=example&amp;page=8&amp;query=%ED%95%98%EB%8A%98&amp;shouldSearchVlive=false" onclick="clickcr(this,'pgn.next','2','',event);">8</a>
+                                    <a href="#/search?range=example&amp;page=9&amp;query=%ED%95%98%EB%8A%98&amp;shouldSearchVlive=false" onclick="clickcr(this,'pgn.next','2','',event);">9</a>
+                                    <a href="#/search?range=example&amp;page=10&amp;query=%ED%95%98%EB%8A%98&amp;shouldSearchVlive=false" onclick="clickcr(this,'pgn.next','2','',event);">10</a>
+                        <span class="bar">구분선</span>
+                                <a href="#/search?range=example&amp;page=2&amp;query=%ED%95%98%EB%8A%98&amp;shouldSearchVlive=false" class="next" onclick="clickcr(this,'pgn.next','3','',event);">Next</a>
+            </div>
+</div>

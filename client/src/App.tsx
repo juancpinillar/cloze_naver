@@ -1,18 +1,83 @@
 import { useCallback, useEffect, useState } from "react"
 import { getHtmlContent } from "./api/htmlUpdates"
+import { NaverExample } from "./types"
 import Button from "./widgets/Button"
 import H from "./widgets/H"
 
+function extractTargetSent(targetSection: Element): string {
+  const targetSpan = targetSection.children[0]
+  const targetTextRaw = (targetSpan as HTMLElement).innerText
+  const targetText = targetTextRaw.trim()
+  return targetText
+}
+
+function extractSourceSent(sourceSection: Element): string {
+  const sourceP = sourceSection.children[0]
+  const sourceTextRaw = (sourceP as HTMLElement).innerText
+  const sourceSent = sourceTextRaw.trim()
+  return sourceSent
+}
+
+function extractOrigin(originSection: Element): string {
+  const originAnchor = originSection as HTMLElement
+  const originRaw = originAnchor.innerText
+  const origin = originRaw.trim()
+  return origin
+}
+
+function rowToNaverExample(row: Element): NaverExample {
+  const rowChildren = row.children
+
+  const sourceSection = rowChildren[0]
+  const sourceSent = extractSourceSent(sourceSection)
+  
+  const targetSection = rowChildren[1]
+  const targetSent = extractTargetSent(targetSection)
+
+  const originSection = rowChildren[2]
+  const origin = extractOrigin(originSection)
+
+  return {
+    targetSent,
+    sourceSent,
+    origin,
+  }
+}
+
+function extractNaverExamples(content: string): NaverExample[] {
+  const root = new DOMParser().parseFromString(content, 'text/html')
+  const n1 = root.getElementById('searchPage_example')
+  const n2 = n1!.children[2]
+  const rows = n2.children
+  const naverExamples: NaverExample[] = []
+  for (let i = 0; i < rows.length - 1; i++) {
+    const row = rows[i]
+    const naverExample = rowToNaverExample(row)
+    naverExamples.push(naverExample)
+  }
+
+  return naverExamples
+}
+
 const App: React.FC = () => {
-  const [content, setContent] = useState<string | null>(null)
+  const [naverExamples, setNaverExamples] = useState<NaverExample[] | null>(null)
   const [isFetching, setIsFetching] = useState<boolean>(false)
+
+  const updateNaverExamples = useCallback(() => {
+    getHtmlContent().then(content => {
+      const naverExamples = extractNaverExamples(content)
+      setNaverExamples(naverExamples)
+    })
+  }, [])
+
+  useEffect(updateNaverExamples, [updateNaverExamples])
 
   const onVisibilityChange = useCallback(() => {
     if (!document.hidden && isFetching) {
-      getHtmlContent().then(setContent)
+      updateNaverExamples()
       setIsFetching(false)
     }
-  }, [isFetching])
+  }, [isFetching, updateNaverExamples])
 
   useEffect(() => {
     const visibilityChangeEvent = 'visibilitychange'
@@ -24,19 +89,23 @@ const App: React.FC = () => {
   
   const fetchHtml = useCallback(() => {
     setIsFetching(true)
-    window.open('https://en.dict.naver.com/#/search?range=example&shouldSearchVlive=false&query=%ED%95%98%EB%8A%98&haveTrans=exist:1')
+    window.open('https://en.dict.naver.com/#/search?range=example&shouldSearchVlive=false&query=바람&haveTrans=exist:1')
   }, [])
-
-  if (content) {
-    console.log(content)
-  } else {
-    console.log('no content')
-  }
 
   return (
     <div className="flex flex-col p-24 items-center space-y-12">
       <Button onClick={fetchHtml}>Fetch</Button>
-      {isFetching && <H>Fetching</H>}
+      {naverExamples && 
+        <div className="flex flex-col space-y-6">
+          {naverExamples.map(naverExample => (
+            <div key={naverExample.sourceSent} className="flex flex-col space-y-2">
+              <div>{naverExample.targetSent}</div>
+              <div>{naverExample.sourceSent}</div>
+              <div>{naverExample.origin}</div>
+            </div>
+          ))}
+        </div>
+      }
     </div>
   )
 }

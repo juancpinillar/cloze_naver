@@ -9,3 +9,8 @@ export interface HtmlUpdateDb extends HtmlUpdate, Document {}
 export interface RestError {
   err: string
 }
+
+export interface SentPair {
+  targetSent: string
+  sourceSent: string
+}
