@@ -3,6 +3,8 @@ import { getHtmlContent } from "./api/htmlUpdates"
 import { NaverExample } from "./types"
 import Button from "./widgets/Button"
 import H from "./widgets/H"
+import Input from "./widgets/Input"
+import SubmitInput from "./widgets/SubmitInput"
 
 function extractTargetSent(targetSection: Element): string {
   const targetSpan = targetSection.children[0]
@@ -62,6 +64,7 @@ function extractNaverExamples(content: string): NaverExample[] {
 const App: React.FC = () => {
   const [naverExamples, setNaverExamples] = useState<NaverExample[] | null>(null)
   const [isFetching, setIsFetching] = useState<boolean>(false)
+  const [searchWord, setSearchWord] = useState<string | null>('사랑')
 
   const updateNaverExamples = useCallback(() => {
     getHtmlContent().then(content => {
@@ -70,8 +73,6 @@ const App: React.FC = () => {
     })
   }, [])
 
-  useEffect(updateNaverExamples, [updateNaverExamples])
-
   const onVisibilityChange = useCallback(() => {
     if (!document.hidden && isFetching) {
       updateNaverExamples()
@@ -79,7 +80,7 @@ const App: React.FC = () => {
     }
   }, [isFetching, updateNaverExamples])
 
-  useEffect(() => {
+  useEffect(function addVisibilityChangeListener() {
     const visibilityChangeEvent = 'visibilitychange'
     document.addEventListener(visibilityChangeEvent, onVisibilityChange)
     return () => {
@@ -88,13 +89,22 @@ const App: React.FC = () => {
   }, [onVisibilityChange])
   
   const fetchHtml = useCallback(() => {
-    setIsFetching(true)
-    window.open('https://en.dict.naver.com/#/search?range=example&shouldSearchVlive=false&query=바람&haveTrans=exist:1')
-  }, [])
+    if (searchWord) {
+      setIsFetching(true)
+      const page = 1
+      window.open(`https://en.dict.naver.com/#/search?range=example&page=${page}&query=${searchWord}&shouldSearchVlive=false&haveTrans=exist:1`)
+    }
+  }, [searchWord])
 
   return (
     <div className="flex flex-col p-24 items-center space-y-12">
-      <Button onClick={fetchHtml}>Fetch</Button>
+      <div>
+        <Input
+          value={searchWord}
+          onValueChange={setSearchWord}
+          onSubmit={fetchHtml}
+          autofocus />
+      </div>
       {naverExamples && 
         <div className="flex flex-col space-y-6">
           {naverExamples.map(naverExample => (

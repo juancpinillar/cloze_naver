@@ -6,7 +6,7 @@ const Pill: React.FC = props => {
   } = props
 
   return (
-    <div className="inline-block rounded-full text-white bg-blue-500 px-2 py-1 text-xs font-bold">
+    <div className="w-full inline-block rounded-full text-white bg-blue-500 px-2 py-1 text-xs font-bold">
       {children}
     </div>
   )
@@ -14,11 +14,12 @@ const Pill: React.FC = props => {
 
 interface Props {
   onSubmit: (value: string) => void
-  onCancel: () => void
-
+  
+  onCancel?: () => void
   showHowTo?: boolean
   errorMessage?: string
   autofocus?: boolean
+  clearAfterSubmit?: boolean
   onTypingResumed?: () => void
 }
 
@@ -33,6 +34,7 @@ const SubmitInput: React.FC<Props> = props => {
   } = props
 
   const showHowTo = props.showHowTo ?? false
+  const clearAfterSubmit = props.clearAfterSubmit ?? false
 
   const [value, setValue] = useState<string | null>(null)
 
@@ -49,12 +51,16 @@ const SubmitInput: React.FC<Props> = props => {
   function handleEnterPressed() {
     if (value) {
       onSubmit(value)
-      setValue(null)
+      if (clearAfterSubmit) {
+        setValue(null)
+      }
     }
   }
 
   function handleEscapePressed() {
-    onCancel()
+    if (onCancel) {
+      onCancel()
+    }
   }
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
