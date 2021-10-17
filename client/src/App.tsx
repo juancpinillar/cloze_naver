@@ -1,10 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 import { getHtmlContent } from "./api/htmlUpdates"
 import { NaverExample } from "./types"
-import Button from "./widgets/Button"
-import H from "./widgets/H"
 import Input from "./widgets/Input"
-import SubmitInput from "./widgets/SubmitInput"
 
 function extractTargetSent(targetSection: Element): string {
   const targetSpan = targetSection.children[0]
